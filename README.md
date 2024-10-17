@@ -89,7 +89,7 @@ The frontend will be accessible at http://localhost:3000
 
 ## File Structure
 ```
-clothing-classification-app/
+scothing/
 │
 ├── dataset/                        # DeepFashion dataset
 │   ├── images/                     # Image files
