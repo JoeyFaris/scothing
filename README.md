@@ -2,6 +2,10 @@
 
 This project is a web application that takes an image of clothing, analyzes it using a machine learning model, and provides feedback on the type of clothing (e.g., shirt, pants, hat). The app uses a deep learning model fine-tuned on the **DeepFashion** dataset to classify clothing items.
 
+# Goal
+
+The goal is to create an application where users can upload photos and screenshots of humans wearing a specific piece of clothing (From instagram posts to Netflix clips) and the model can send back details of the piece of clothing(s), send that information to an LLM that will generate products and links of the same or similar products.
+
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
