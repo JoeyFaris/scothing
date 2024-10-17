@@ -45,8 +45,8 @@ The project requires the following dependencies:
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/clothing-classification-app.git
-cd clothing-classification-app
+git clone https://github.com/JoeyFaris/scothing.git
+cd scothing-app
 ```
 
 2. Set up a virtual environment:
