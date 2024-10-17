@@ -1,0 +1,1 @@
+use a more specific pre-trained model for clothing detection
