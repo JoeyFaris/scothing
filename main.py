@@ -112,6 +112,11 @@ def analyze_clothing():
     logging.info(f"Final result: {result}")
     return jsonify(result)
 
+# Add something new: a health check endpoint
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'healthy'}), 200
+
 if __name__ == '__main__':
     logging.info("Starting the Flask application")
     app.run(debug=True)
