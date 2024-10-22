@@ -1,128 +1,108 @@
 # Clothing Classification Application
 
-This project is a web application that takes an image of clothing, analyzes it using a machine learning model, and provides feedback on the type of clothing (e.g., shirt, pants, hat). The app uses a deep learning model fine-tuned on the **DeepFashion** dataset to classify clothing items.
-
-# Goal
-
-The goal is to create an application where users can upload photos and screenshots of humans wearing a specific piece of clothing (From instagram posts to Netflix clips) and the model can send back details of the piece of clothing(s), send that information to an LLM that will generate products and links of the same or similar products.
-
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-- [File Structure](#file-structure)
-- [Model](#model)
-- [License](#license)
-
-## Overview
-
-The application consists of:
-- **Backend API**: Accepts images via an API call, processes them using a pre-trained model fine-tuned on the DeepFashion dataset, and returns the predicted clothing category.
-- **Frontend**: A simple interface where users can upload an image and see the clothing type predicted by the model.
+This is a machine learning-powered web application that classifies clothing items from user-uploaded photos. The application includes a frontend for user interaction, a backend API for image processing and classification, and a machine learning model for analyzing clothing types. The project is containerized using Docker for easy deployment.
 
 ## Features
-- Upload an image and get a prediction of clothing type (shirt, pants, hat, etc.)
-- Pre-trained model fine-tuned on the DeepFashion dataset for robust predictions
-- Simple, user-friendly web interface
 
-## Requirements
+- **Machine Learning Model**: A Convolutional Neural Network (CNN) trained to classify clothing items.
+- **REST API**: Built with Flask to handle image uploads and return predictions.
+- **Frontend**: A React-based UI for users to upload photos and view classification results.
+- **Dockerized Deployment**: Uses Docker and Docker Compose for multi-service orchestration.
+- **Automated Training**: Scripts for running model training in a containerized environment.
 
-The project requires the following dependencies:
+## Table of Contents
 
-- Python 3.8+
-- TensorFlow or PyTorch (depending on your chosen deep learning framework)
-- Flask or FastAPI for the API backend
-- React (or any other JS framework) for the frontend
-- DeepFashion dataset (download [here](http://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html))
-
-### Python Libraries
-- `tensorflow` or `torch`
-- `flask` or `fastapi`
-- `pillow`
-- `numpy`
-- `opencv-python`
-- `scikit-learn`
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Project Structure](#project-structure)
+4. [Contributing](#contributing)
+5. [License](#license)
 
 ## Installation
 
-1. Clone this repository:
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- Node.js (for frontend)
+- Python 3.x (for API and machine learning)
+
+### Setup
+
+1. Clone the repository:
 ```bash
-git clone https://github.com/JoeyFaris/scothing.git
-cd scothing-app
+git clone https://github.com/yourusername/clothing-classification-app.git
+cd clothing-classification-app
 ```
 
-2. Set up a virtual environment:
+2. Build and run the containers:
 ```bash
-python3 -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
+docker-compose up --build
 ```
 
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-4. Download the DeepFashion dataset and place it in the `dataset/` folder
+The application will be accessible at http://localhost:3000 for the frontend and http://localhost:5000 for the API.
 
 ## Usage
 
-### 1. Train the Model
-To train the model on the DeepFashion dataset:
+### Frontend
+- Access the frontend at http://localhost:3000
+- Upload an image of clothing
+- The API will analyze the image and return the predicted clothing type
+
+### API
+Send a POST request to the API at http://localhost:5000/predict with an image file.
+The API will return a JSON response with the predicted clothing type.
+
+Example using curl:
 ```bash
-python model/train.py
+curl -X POST -F "file=@path/to/image.jpg" http://localhost:5000/predict
 ```
 
-### 2. Start the Backend API
-To start the API for image classification:
+### Model Training
+To train the model, use the provided script:
 ```bash
-cd api/
-python app.py
+./scripts/run_training.sh
 ```
-The API will run on http://localhost:5000
+This will start the training process using the data in the dataset/ folder.
 
-### 3. Start the Frontend
-Move to the frontend/ folder, install dependencies, and start the frontend server:
-```bash
-cd frontend/
-npm install
-npm start
-```
-The frontend will be accessible at http://localhost:3000
+## Project Structure
 
-## File Structure
-```
-scothing/
-│
-├── dataset/                        # DeepFashion dataset
-│   ├── images/                     # Image files
-│   ├── labels.csv                  # Labels mapping to clothing categories
-│
-├── model/                          # Model-related files
-│   ├── train.py                    # Script for training the model
-│   ├── model.py                    # Model architecture (e.g., ResNet)
-│   ├── evaluate.py                 # Script to evaluate model performance
-│   ├── saved_model/                # Saved model checkpoints
-│
-├── api/                            # Backend API for image classification
-│   ├── app.py                      # Flask/FastAPI app for inference
-│   ├── utils.py                    # Helper functions (image preprocessing, prediction)
-│
-├── frontend/                       # Frontend files (React app)
-│   ├── public/                     # Public assets (e.g., index.html)
-│   ├── src/                        # React source files
-│   ├── App.js                      # Frontend logic for image upload and display
-│
-├── requirements.txt                # Python dependencies
-├── README.md                       # Project documentation
-└── .gitignore                      # Ignoring unnecessary files
+```plaintext
+├── README.md               # Project documentation
+├── api                     # Backend API
+│   ├── Dockerfile           # Dockerfile for API service
+│   ├── app.py               # Main API logic (Flask)
+│   ├── requirements.txt     # API dependencies
+│   └── utils.py             # Helper functions for API
+├── dataset                  # Dataset folder
+│   └── labels.csv           # Image labels for model training
+├── docker-compose.yml       # Docker Compose configuration
+├── frontend                 # Frontend UI (React)
+│   ├── App.js               # Main frontend component
+│   └── package.json         # Frontend dependencies
+├── main.py                  # Entry point for the application
+├── model                    # Machine learning model code
+│   ├── config.py            # Configuration settings for the model
+│   ├── evaluate.py          # Model evaluation script
+│   ├── model.py             # Model architecture
+│   └── train.py             # Model training logic
+├── requirements.txt         # Root Python dependencies
+├── scripts                  # Shell scripts for automation
+│   ├── run_training.sh      # Script to run model training
+│   └── setup.sh             # Setup script
+└── tests                    # Unit and integration tests
+    ├── test_api.py          # Tests for API
+    └── test_model.py        # Tests for machine learning model
 ```
 
-## Model
-The model used in this project is based on a pre-trained deep learning architecture (e.g., ResNet, VGG, MobileNet) fine-tuned on the DeepFashion dataset. The model predicts clothing categories such as "shirt", "pants", "hat", etc.
+## Contributing
 
-If you want to customize the model, you can modify `model/model.py` and re-train it using `model/train.py`.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/my-feature`)
+3. Commit your changes (`git commit -m 'Add my feature'`)
+4. Push to the branch (`git push origin feature/my-feature`)
+5. Open a pull request
 
 ## License
-This project is licensed under the MIT License.
+
+This project is licensed under the MIT License - see the LICENSE file for details.
