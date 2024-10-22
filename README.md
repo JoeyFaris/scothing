@@ -31,8 +31,8 @@ This is a machine learning-powered web application that classifies clothing item
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/clothing-classification-app.git
-cd clothing-classification-app
+git clone https://github.com/joeyfaris/scothing.git
+cd scothing
 ```
 
 2. Build and run the containers:

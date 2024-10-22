@@ -1,0 +1,6 @@
+"""
+image_path,category
+/path/to/image1.jpg,shirt
+/path/to/image2.jpg,pants
+/path/to/image3.jpg,dress
+"""
