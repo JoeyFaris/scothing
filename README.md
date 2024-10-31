@@ -15,8 +15,6 @@ This is a machine learning-powered web application that classifies clothing item
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [Project Structure](#project-structure)
-4. [Contributing](#contributing)
-5. [License](#license)
 
 ## Installation
 
@@ -95,14 +93,3 @@ This will start the training process using the data in the dataset/ folder.
     └── test_model.py        # Tests for machine learning model
 ```
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/my-feature`)
-3. Commit your changes (`git commit -m 'Add my feature'`)
-4. Push to the branch (`git push origin feature/my-feature`)
-5. Open a pull request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
